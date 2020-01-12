@@ -1,4 +1,4 @@
-import socket, threading, pickle
+import socket, threading, pickle, sys
 
 class Node:
     def __init__(self, listen_port):
@@ -47,7 +47,7 @@ class Node:
                 self.peers[peer].send(pickle.dumps(message))
 
 if __name__ == "__main__":
-    node = Node(2)
+    node = Node(int(sys.argv[1]))
     node.init_connect()
     t1 = threading.Thread(target=node.receive, args=())
     t2 = threading.Thread(target=node.connect, args=())
